@@ -1,25 +1,41 @@
 using System.Diagnostics;
 using EstudaMais.Models;
+using EstudaMais.Repositório;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstudaMais.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMateriaRepositorio _materiaRepositorio;
+        public HomeController(IMateriaRepositorio materiaRepositorio)
+        {
+            _materiaRepositorio = materiaRepositorio;
+        }
         public IActionResult Index()
         {
-            return View();
+            List<MateriaModel> materias = _materiaRepositorio.BuscarTodas();
+            return View(materias);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Criar()
+        {
+            return View();
+        }
+        public IActionResult Editar()
+        {
+            return View();
+        }
+        public IActionResult ExcluirConfirmacao()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult Criar(MateriaModel materia)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _materiaRepositorio.Adicionar(materia);
+            return RedirectToAction("Index");
         }
     }
 }

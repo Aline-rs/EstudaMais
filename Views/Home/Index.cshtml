@@ -1,8 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<MateriaModel>
+@{
+    ViewData["Title"] = "Página inicial";
 }
-
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary" role="button" asp-controller="Home" asp-action="Criar">Adicionar nova matéria</a>
+    </div>
+
+    <h1 class="display-4">Matérias</h1>
+    <p>Cadastre aqui as suas disciplinas</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Matéria</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model != null && Model.Any()){
+                foreach(MateriaModel materia in Model){
+                    <tr>
+                        <th scope="row">@materia.Id</th>
+                        <td>@materia.NomeMateria</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-warning" asp-route-id="@materia.Id" asp-controller="Home" asp-action="Editar" asp-route-id="@materia.Id">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@materia.Id" asp-controller="Home" asp-action="ExcluirConfirmacao" asp-route-id="@materia.Id">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>

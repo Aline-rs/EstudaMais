@@ -1,0 +1,20 @@
+﻿@model MateriaModel
+@{
+    ViewData["Title"] = "Cadastro de matérias";
+}
+<div class="text-center">
+
+    <h1 class="display-4">Cadastro de Disciplinas</h1>
+    <p>Cadastre aqui as suas disciplinas</p>
+</div>
+
+<form asp-controller="Home" asp-action="Criar" method="post">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Disciplina</label>
+        <input type="text" asp-for="NomeMateria" class="form-control" placeholder="Digite o nome da disciplina">
+    </div>
+    <button type="submit" class="btn btn-success">Cadastrar</button>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index" role="button">Voltar</a>
+</form>
+
+

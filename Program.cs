@@ -1,7 +1,14 @@
+using EstudaMais.Data;
+using EstudaMais.Repositório;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddEntityFrameworkSqlServer()
+    .AddDbContext<BancoContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
+builder.Services.AddScoped<IMateriaRepositorio, MateriaRepositorio>();
 
 var app = builder.Build();
 
