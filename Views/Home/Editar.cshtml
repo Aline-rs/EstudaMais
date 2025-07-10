@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MateriaModel
+@{
     ViewData["Title"] = "Editar matérias";
 }
 <div class="text-center">
@@ -7,10 +8,11 @@
     <p>Edite aqui as suas disciplinas</p>
 </div>
 
-<form>
+<form asp-controller="Home" asp-action="Alterar" method="post">
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label for="nome" class="form-label">Disciplina</label>
-        <input type="text" class="form-control" placeholder="Digite o novo nome da disciplina">
+        <input type="text" asp-for="NomeMateria" class="form-control" placeholder="Digite o nome da disciplina">
     </div>
     <button type="submit" class="btn btn-success">Alterar</button>
     <a class="btn btn-secondary" asp-controller="Home" asp-action="Index" role="button">Voltar</a>

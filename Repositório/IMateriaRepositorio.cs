@@ -6,5 +6,8 @@ namespace EstudaMais.Repositório
     {
         List<MateriaModel> BuscarTodas();
         MateriaModel Adicionar(MateriaModel materia);
+        MateriaModel ListarPorId(int id);
+        MateriaModel Atualizar(MateriaModel materia);
+        bool Apagar(int id);
     }
 }

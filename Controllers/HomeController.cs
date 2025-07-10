@@ -22,19 +22,34 @@ namespace EstudaMais.Controllers
         {
             return View();
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            MateriaModel materia = _materiaRepositorio.ListarPorId(id);
+            return View(materia);
         }
-        public IActionResult ExcluirConfirmacao()
+        public IActionResult ExcluirConfirmacao(int id)
         {
-            return View();
+            MateriaModel materia = _materiaRepositorio.ListarPorId(id);
+            return View(materia);
+        }
+
+        public IActionResult Apagar(int id)
+        {
+            _materiaRepositorio.Apagar(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Criar(MateriaModel materia)
         {
             _materiaRepositorio.Adicionar(materia);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(MateriaModel materia)
+        {
+            _materiaRepositorio.Atualizar(materia);
             return RedirectToAction("Index");
         }
     }
